@@ -1,4 +1,5 @@
 var Coffre = require(__dirname + '/../index');
+Coffre.ENV = 'test';
 var expect = require('chai').expect;
 
 describe('Coffre', function() {
