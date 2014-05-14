@@ -21,9 +21,10 @@
   },
   "homepage": "https://github.com/HPNeo/coffre",
   "devDependencies": {
+    "colors": "~0.6.2",
     "chai": "~1.9.0",
     "mocha": "~1.18.2",
-    "inflector": "~0.0.1",
+    "inflecta": "~0.8.3",
     "sqlite3": "~2.2.3"
   }
 }
