@@ -3,6 +3,11 @@ Coffre.ENV = 'test';
 var expect = require('chai').expect;
 
 describe('Coffre', function() {
+  before(function() {
+    Coffre.MigrationManager.runMigration('1400127361265', 'up');
+    Coffre.MigrationManager.runMigration('1400139025169', 'up');
+  });
+
   beforeEach(function() {
     Coffre.clearModels();
   });

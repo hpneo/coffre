@@ -3,6 +3,11 @@ Coffre.ENV = 'test';
 var expect = require('chai').expect;
 
 describe('Coffre', function() {
+  before(function() {
+    Coffre.MigrationManager.runMigration('1400127361265', 'up');
+    Coffre.MigrationManager.runMigration('1400139025169', 'up');
+  });
+
   beforeEach(function() {
     Coffre.clearModels();
   });
@@ -20,11 +25,11 @@ describe('Coffre', function() {
           this.setTableName('users_users');
         }),
         Blog = Coffre.build('Blog', function() {
-          this.setTableName('users_blogs');
+          this.setTableName('blogs_blogs');
         });
 
     expect(User.getTableName()).to.equal('users_users');
-    expect(Blog.getTableName()).to.equal('users_blogs');
+    expect(Blog.getTableName()).to.equal('blogs_blogs');
   });
 
   it('should allow build instances of existing models', function() {
