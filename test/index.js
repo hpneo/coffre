@@ -3,6 +3,10 @@ Coffre.ENV = 'test';
 var expect = require('chai').expect;
 
 describe('Coffre', function() {
+  beforeEach(function() {
+    Coffre.clearModels();
+  });
+  
   it('should build models', function() {
     var User = Coffre.build('User'),
         Blog = Coffre.build('Blog');
@@ -39,29 +43,5 @@ describe('Coffre', function() {
 
     expect(hpneo.get('firstName')).to.equal('Gustavo');
     expect(rsi.get('title')).to.equal('Reflexiones sin importancia');
-  });
-
-  it('should build models with associations', function() {
-    var User = Coffre.build('User', function() {
-          this.setTableName('users_users');
-          this.hasMany('blogs');
-        }),
-        Blog = Coffre.build('Blog', function() {
-          this.setTableName('users_blogs');
-          this.belongsTo('user');
-        });
-
-    var hpneo = new User({
-      firstName: 'Gustavo',
-      lastName: 'Leon',
-      email: 'hpneo@hotmail.com'
-    });
-
-    var rsi = new Blog({
-      title: 'Reflexiones sin importancia'
-    });
-
-    expect(hpneo.blogs).to.be.an.instanceOf(Coffre.Relation);
-    expect(rsi.user).to.be.an.instanceOf(Coffre.Relation);
   });
 });
