@@ -9,7 +9,6 @@ describe('Coffre', function() {
       Coffre.MigrationManager.runMigration('1400127361265', 'up'),
       Coffre.MigrationManager.runMigration('1400139025169', 'up')
     ]).then(function() {
-      console.log(arguments);
       done();
     });
   });
@@ -50,6 +49,11 @@ describe('Coffre', function() {
 
     var rsi = new Blog({
       title: 'Reflexiones sin importancia'
+    });
+
+    Coffre.sync().then(function() {
+      expect(hpneo.get('firstName')).to.equal(hpneo.firstName);
+      expect(rsi.get('title')).to.equal(rsi.title);
     });
 
     expect(hpneo.get('firstName')).to.equal('Gustavo');
