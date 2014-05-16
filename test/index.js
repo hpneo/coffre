@@ -1,11 +1,16 @@
 var Coffre = require(__dirname + '/../index');
 Coffre.ENV = 'test';
+var RSVP = require('rsvp');
 var expect = require('chai').expect;
 
 describe('Coffre', function() {
-  before(function() {
-    Coffre.MigrationManager.runMigration('1400127361265', 'up');
-    Coffre.MigrationManager.runMigration('1400139025169', 'up');
+  before(function(done) {
+    RSVP.all([
+      Coffre.MigrationManager.runMigration('1400127361265', 'up'),
+      Coffre.MigrationManager.runMigration('1400139025169', 'up')
+    ]).then(function() {
+      done();
+    });
   });
 
   beforeEach(function() {
